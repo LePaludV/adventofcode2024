@@ -69,17 +69,13 @@ func main() {
 	//part two
 	reallySafe := 0
 	for _, reportTmp := range values {
-		reportLength := len(reportTmp) + 1
+		reportLength := len(reportTmp)
 		isFullySafe := false
 		i := 0
 		for i < reportLength {
 			var report []int
-			for ind, el := range reportTmp {
-				if ind != i {
-					report = append(report, el)
-				}
-			}
-
+			report = append([]int{}, reportTmp[:i]...)  // copie la partie avant i
+			report = append(report, reportTmp[i+1:]...) // ajoute la partie après i
 			i++
 			if report[0] != report[1] {
 				isIncreasing := report[0] < report[1]
